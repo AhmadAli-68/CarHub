@@ -33,6 +33,7 @@ const Hero = () => {
             src='/hero.png'
             alt='hero'
             fill
+            sizes='auto'
             className='object-contain'
           />
         </div>
