@@ -30,7 +30,12 @@ const SearchManufacturer = ({
 
   return (
     <div className='search-manufacturer'>
-      <Combobox>
+      <Combobox
+        value={manufacturer}
+        onChange={(value) => {
+          if (value !== null) setManufacturer(value)
+        }}
+      >
         <div className='relative w-full'>
           <ComboboxButton className='absolute top-3.5'>
             <Image
@@ -68,7 +73,22 @@ const SearchManufacturer = ({
                     ${focus ? 'bg-primary-blue text-white' : 'text-gray-900'}
                     `}
                 >
-                  {item}
+                  {({ selected, focus }) => (
+                    <>
+                      <span className={`block truncate ${selected
+                        ? 'font-medium' : 'font-normal'
+                        }`}>
+                        {item}
+                      </span>
+
+                      {selected ? (
+                        <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${focus
+                          ? 'text-white'
+                          : ''
+                          }`}></span>
+                      ) : null}
+                    </>
+                  )}
                 </ComboboxOption>
               )
               )}
