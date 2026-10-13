@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
       },
     },
   },
+
+  images: {
+    remotePatterns: [new URL('https://cdn.imagin.studi')]
+  }
 };
 
 export default nextConfig;
