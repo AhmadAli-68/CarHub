@@ -4,12 +4,19 @@ import {
   Hero,
   SearchBar
 } from '@/components'
+import { HomeProps } from '@/types'
 
 import { fetchCars } from '@/utils'
 import { Suspense } from 'react'
 
-const page = async () => {
-  const allCars = await fetchCars()
+const page = async ({ searchParams }: HomeProps) => {
+  const allCars = await fetchCars({
+    manufacturer: searchParams.manufacturer || '',
+    year: searchParams.year || 2024,
+    fuel: searchParams.fuel || '',
+    limit: searchParams.limit || 10,
+    model: searchParams.model || '',
+  })
 
   console.log(allCars)
 
