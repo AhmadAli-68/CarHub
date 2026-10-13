@@ -4,18 +4,21 @@ import {
   Hero,
   SearchBar
 } from '@/components'
+import { fuels, yearsOfProduction } from '@/constants'
 import { HomeProps } from '@/types'
 
 import { fetchCars } from '@/utils'
 import { Suspense } from 'react'
 
 const page = async ({ searchParams }: HomeProps) => {
+  const params = await searchParams;
+
   const allCars = await fetchCars({
-    manufacturer: searchParams.manufacturer || '',
-    year: searchParams.year || 2024,
-    fuel: searchParams.fuel || '',
-    limit: searchParams.limit || 10,
-    model: searchParams.model || '',
+    manufacturer: params.manufacturer || '',
+    year: params.year || 2024,
+    fuel: params.fuel || '',
+    // limit: searchParams.limit || 10,
+    model: params.model || '',
   })
 
   console.log(allCars)
@@ -39,8 +42,14 @@ const page = async ({ searchParams }: HomeProps) => {
           <SearchBar />
 
           <div className='home__filter-container'>
-            <CustomFilter title='fuel' />
-            <CustomFilter title='year' />
+            <CustomFilter
+              title='Fuel'
+              options={fuels}
+            />
+            <CustomFilter
+              title='Year'
+              options={yearsOfProduction}
+            />
           </div>
         </div>
 
@@ -54,7 +63,7 @@ const page = async ({ searchParams }: HomeProps) => {
               </div>
             </section>
           ) : (
-            <div className='home__container'>
+            <div className='home__error-container'>
               <h2 className='text-black text-xl font-bold'>Oops, no results.</h2>
               <p>{allCars?.message}</p>
             </div>

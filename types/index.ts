@@ -34,10 +34,20 @@ export interface FilterProps {
   manufacturer?: string;
   year?: number;
   model?: string;
-  limit?: number;
+  // limit?: number;
   fuel?: string;
 }
 
 export interface HomeProps {
-  searchParams: FilterProps;
+  searchParams: Promise<FilterProps>;
+}
+
+export interface OptionProps {
+  title: string;
+  value: string;
+}
+
+export interface CustomFilterProps {
+  title: string;
+  options: OptionProps[];
 }
