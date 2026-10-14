@@ -2,7 +2,8 @@ import {
   CarCard,
   CustomFilter,
   Hero,
-  SearchBar
+  SearchBar,
+  ShowMore
 } from '@/components'
 import { fuels, yearsOfProduction } from '@/constants'
 import { HomeProps } from '@/types'
@@ -61,6 +62,11 @@ const page = async ({ searchParams }: HomeProps) => {
                   <CarCard key={car.model} car={car} />
                 ))}
               </div>
+
+              <ShowMore
+                pageNumber={(100) / 10}
+                isNext={false}
+              />
             </section>
           ) : (
             <div className='home__error-container'>
